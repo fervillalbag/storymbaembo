@@ -1,10 +1,11 @@
 #root {
   height: 100%;
 }
+
 html,
 body {
   position: relative;
-  height: 100%;
+  height: 100vh;
 }
 
 body {
@@ -18,15 +19,13 @@ body {
 
 .swiper-container {
   width: 100%;
-  height: 100%;
+  height: 100vh;
 }
 
 .swiper-slide {
   text-align: center;
-  font-size: 18px;
   background: #fff;
 
-  /* Center slide text vertically */
   display: -webkit-box;
   display: -ms-flexbox;
   display: -webkit-flex;
@@ -39,17 +38,4 @@ body {
   -ms-flex-align: center;
   -webkit-align-items: center;
   align-items: center;
-}
-
-img {
-  display: block !important;
-  width: 100% !important;
-  height: 100% !important;
-}
-
-.swiper-slide img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
 }

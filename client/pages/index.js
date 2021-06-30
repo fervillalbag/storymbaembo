@@ -1,7 +1,10 @@
 import Head from "next/head";
+import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
+import SwiperCore, { Pagination } from "swiper/core";
 import "swiper/swiper.min.css";
 import "swiper/components/pagination/pagination.min.css";
+import { useState } from "react";
 
 export async function getStaticProps() {
   const res = await fetch(
@@ -23,6 +26,13 @@ export async function getStaticProps() {
 }
 
 export default function Home({ data }) {
+  const [swiperRef, setSwiperRef] = useState(null);
+  SwiperCore.use([Pagination]);
+
+  const slideTo = (index) => {
+    swiperRef.slideTo(index - 1, 0);
+  };
+
   return (
     <div>
       <Head>
@@ -42,10 +52,19 @@ export default function Home({ data }) {
         {data &&
           data.map((item) => (
             <SwiperSlide className="item" key={item.id}>
-              <Swiper navigation={true} className="mySwiper">
+              <Swiper
+                onSwiper={setSwiperRef}
+                onSlideChange={() => slideTo(0)}
+                navigation={true}
+                className="mySwiper"
+              >
                 {item.images.map((image) => (
                   <SwiperSlide key={image.id}>
-                    <img src={image.url} />
+                    <Image
+                      src={image.url}
+                      alt={`Image ${image.id}`}
+                      layout="fill"
+                    />
                   </SwiperSlide>
                 ))}
               </Swiper>
